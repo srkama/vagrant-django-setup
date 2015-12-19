@@ -29,7 +29,7 @@ ROOTPASSWORD=""								# Password for root use
 
 
 PASSWORD=$(URLENCODE $PASSWORD)				# URL encoded password, when it has special chars
-GIT_REPO_URL=https://$USERNAME:$PASSWORD@$REPO_PROVIDER/$REPO_GROUP/$GIT_REPO_NAME.git  #Complete Repo URL 
+GIT_REPO_URL=https://$USERNAME:$PASSWORD@$REPO_PROVIDER/REPO_GROUP/$GIT_REPO_NAME.git  #Complete Repo URL 
 
 
 #-------------------------------------------------------------------------------
@@ -91,10 +91,9 @@ sudo pip install -r requirements.txt
 echo "Copying supervisor config.."
 sudo cp /src/website/$PROJECT_NAME/bin/supervisor.conf /etc/supervisor/conf.d/
 echo "Re reading and restarting supervisor"
-sudo supervisord
-#sudo supervisorctl reread
-#sudo supervisorctl update
-#sudo supervisorctl restart all
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl restart all
 sudo supervisorctl status
 echo "Copying nginx config to defaul nginx conf and restarting"
 sudo cp /src/website/$PROJECT_NAME/bin/nginx.conf /etc/nginx/sites-available/default
@@ -105,5 +104,5 @@ sudo service nginx status
 #------------------------------------------------------------------------------
 
 echo "Synching up the databases"
-python manage.py syncdb --noinput
-echo "from django.contrib.auth.models import User; User.objects.create_superuser('myadmin', 'myemail@example.com', '123456')" | python manage.py shell
+python manage.py syncdb
+
