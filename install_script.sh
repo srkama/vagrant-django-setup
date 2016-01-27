@@ -20,7 +20,7 @@ PASSWORD=""									# Password
 GIT_REPO_NAME=apartment						# GIT Repo
 PROJECT_NAME=apartment						# what name you want to give for your project
 REPO_PROVIDER=""							# Repo provider githib / bitbucket
-REPO_GROUP=""								# Group
+OWNER=""									# Owner of the Repo
 DBHOST=localhost							# DB Host, default: locahost
 DBNAME=""									# Database name
 DBUSER=""									# User you want to create
@@ -29,7 +29,7 @@ ROOTPASSWORD=""								# Password for root use
 
 
 PASSWORD=$(URLENCODE $PASSWORD)				# URL encoded password, when it has special chars
-GIT_REPO_URL=https://$USERNAME:$PASSWORD@$REPO_PROVIDER/$REPO_GROUP/$GIT_REPO_NAME.git  #Complete Repo URL 
+GIT_REPO_URL=https://$USERNAME:$PASSWORD@$REPO_PROVIDER/$OWNER/$GIT_REPO_NAME.git  #Complete Repo URL 
 
 
 #-------------------------------------------------------------------------------
@@ -106,4 +106,5 @@ sudo service nginx status
 
 echo "Synching up the databases"
 python manage.py syncdb --noinput
-echo "from django.contrib.auth.models import User; User.objects.create_superuser('myadmin', 'myemail@example.com', '123456')" | python manage.py shell
+
+echo "user python manage.py createsuperuser to create the admin user account"
